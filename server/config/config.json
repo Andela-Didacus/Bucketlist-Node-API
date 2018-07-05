@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "didah",
+    "password": "aberdares",
+    "database": "todo-app",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "didah",
+    "password": "aberdares",
+    "database": "todo-app-test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "didah",
+    "password": "aberdares",
+    "database": "todo-app-prod",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
