@@ -40,7 +40,6 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
   update(req, res) {
-    console.log(req.body);
     return Todo
       .findById(req.params.todoId, {
         include: [{
@@ -51,7 +50,7 @@ module.exports = {
       .then(todo => {
         if(!todo) {
           return res.status(404).send({
-            message: "Todo Not FOund",
+            message: "Todo to be Updated Not FOund",
           });
         }
         return todo
@@ -63,5 +62,20 @@ module.exports = {
       })
       .catch((error) => res.status(400).send(error));
   },
-
+  delete(req, res) {
+    return Todo
+      .findById(req.params.todoId)
+      .then(todo => {
+        if(!todo) {
+          return res.status(404).send({
+            message: "Todo to be Deleted Not found",
+          });
+        }
+        return todo
+          .destroy()
+          .then(() => res.status(204).send(todo))
+          .catch(error =>res.status(400).send(error));
+      })
+      .catch(error => res.status(400).send(error));
+  },
 };
