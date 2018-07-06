@@ -37,7 +37,12 @@ module.exports = {
   },
   retrieve(req, res) {
     return TodoItem
-      .findById(req.params.todoItemId, {})
+      .find({
+        where: {
+          id: req.params.todoItemId,
+          todoId: req.params.todoId
+        },
+      })
       .then(todoItem => {
         if(!todoItem) {
           return res.status(404).send({
@@ -47,5 +52,26 @@ module.exports = {
         return res.status(200).send(todoItem);
       })
       .catch(error => res.status(404).send(error))
+  },
+  delete(req, res) {
+    return TodoItem
+    .find({
+      where: {
+        id: req.params.todoItemId,
+        todoId: req.params.todoId
+      },
+    })
+    .then(todoItem => {
+      if(!todoItem) {
+        return res.status(404).send({
+          message: "Item to be deleted not found"
+        })
+      }
+      return todoItem
+        .destroy()
+        .then(() => res.status(204).send())
+        .catch(error => res.status(400).send(error));
+    })
+    .catch(error => res.send(400).send(error));
   }
 };
