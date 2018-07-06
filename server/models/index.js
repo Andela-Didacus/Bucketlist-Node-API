@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require("path");
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 const basename = path.basename(module.filename);
 
 const env = process.env.NODE_ENV || "development";
@@ -11,9 +11,9 @@ const db = {};
 
 let sequelize;
 if(config.use_env_variable) {
-  sequelize = new sequelize(process.env[config.use_env_variable]);
+  sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
-  sequelize = new sequelize(
+  sequelize = new Sequelize(
     config.database, config.username, config.password, config
   );
 }
